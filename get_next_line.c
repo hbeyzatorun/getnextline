@@ -12,7 +12,7 @@ static char	*newline(char **save)
 
 	if (!save)
 		return (NULL);
-	newline = ft_strrchr(*save, '\n');
+	newline = ft_strchr(*save, '\n');
 	if (newline)
 	{
 		len = newline - *save + 1;
