@@ -28,6 +28,24 @@ static char	*newline(char **save)
 		temp = ft_strdup(newline + 1);
 		free(*save);
 		*save = temp;
+		return (res);
+	}
+}
+
+char	readline(int fd, char **save)
+{
+	char	*buffer;
+	int		read_byte;
+
+	read_byte = 0;
+	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buffer)
+		return (NULL);
+	while (read_byte)
+	{
+		read_byte = read(fd, buffer, BUFFER_SIZE);
+		if (read_byte <= 0)
+			return (NULL);
 	}
 }
 
