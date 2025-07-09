@@ -42,7 +42,7 @@ char	*ft_strdup(const char *s)
 	dup[i] = '\0';
 	return (dup);
 }
-void	*ft_strjoin(const char *s1, char const *s2)
+char	*ft_strjoin(const char *s1, char const *s2)
 {
 	int i;
 	int j;
