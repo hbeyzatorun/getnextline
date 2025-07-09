@@ -9,7 +9,7 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-size_t	*ft_strchr(char *s, int c)
+char	*ft_strchr(char *s, int c)
 {
 	if (!s)
 		return (NULL);
@@ -64,4 +64,30 @@ char	*ft_strjoin(const char *s1, char const *s2)
 	}
 	res[i + j] = '\0';
 	return (res);
+}
+void	*ft_memmove(void *dest, const void *src, size_t n)
+{
+	unsigned char *d;
+	unsigned char *s;
+
+	d = (unsigned char *)dest;
+	s = (unsigned char *)src;
+	if (!dest || !src)
+		return (NULL);
+	if (dest > src)
+	{
+		while (n > 0)
+		{
+			n--;
+			d[n] = s[n];
+		}
+	}
+	else
+	{
+		while (n--)
+		{
+			*d++ = *s++;
+		}
+	}
+	return (dest);
 }
