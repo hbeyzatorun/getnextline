@@ -1,6 +1,12 @@
 #include "get_next_line.h"
 #include <stdlib.h>
 
+static void newfree(char **ptr, char *newvalue)
+{
+    free(*ptr);
+    *ptr = newvalue;
+}
+
 static char *newline(char **save)
 {
     char *res;
@@ -10,7 +16,6 @@ static char *newline(char **save)
 
     if (!*save || !**save)
         return (NULL);
-
     newlines = ft_strchr(*save, '\n');
     if (newlines)
     {
@@ -18,19 +23,15 @@ static char *newline(char **save)
         res = malloc(len + 1);
         if (!res)
             return (NULL);
-        ft_memmove(res, *save, len);
+        i = -1;
+        while (++i < len)
+            res[i] = (*save)[i];
         res[len] = '\0';
-
-        char *temp = ft_strdup(newlines + 1);
-        free(*save);
-        *save = temp;
+        newfree(save, ft_strdup(newlines + 1));
+        return (res);
     }
-    else
-    {
-        res = ft_strdup(*save);
-        free(*save);
-        *save = NULL;
-    }
+    res = ft_strdup(*save);
+    newfree(save, NULL);
     return (res);
 }
 
@@ -43,26 +44,19 @@ static char *readline(int fd, char *save)
     buffer = malloc(BUFFER_SIZE + 1);
     if (!buffer)
         return (NULL);
-    while (!ft_strchr(save, '\n'))
+    bytes_read = read(fd, buffer, BUFFER_SIZE);
+    if (bytes_read <= 0)
     {
-        bytes_read = read(fd, buffer, BUFFER_SIZE);
-        if (bytes_read <= 0)
-        {
-            free(buffer);
-            return (NULL);
-        }
-        buffer[bytes_read] = '\0';
-        temp = ft_strjoin(save, buffer);
-        if (!temp)
-        {
-            free(buffer);
-            return (NULL);
-        }
-        free (save);
-        save = temp;
+        free(buffer);
+        return (NULL);
     }
-    free(buffer);
-    return (save);
+    buffer[bytes_read] = '\0';
+    temp = ft_strjoin(*save, buffer);
+    if (!temp)
+        return (NULL);
+    free (*save);
+    *save = temp;
+    return (*save);
 }
 
 char *get_next_line(int fd)
@@ -75,8 +69,8 @@ char *get_next_line(int fd)
         return (NULL);
 	if (!save)
 		save = ft_strdup("");
-	if (!save)
-		return (NULL);
+    if (!save)
+        return (NULL);
 	temp = readline(fd, save);
     if (!temp)
     {
