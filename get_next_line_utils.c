@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: htorun <htorun@student.42istanbul.com.tr>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/10 23:00:26 by htorun            #+#    #+#             */
+/*   Updated: 2025/07/10 23:03:50 by htorun           ###   ########.tr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "get_next_line.h"
 
 size_t	ft_strlen(const char *s)
 {
 	size_t	i;
 
+	i = 0;
 	while (s[i])
 		i++;
 	return (i);
@@ -16,8 +28,7 @@ char	*ft_strchr(char *s, int c)
 	while (*s)
 	{
 		if (*s == (unsigned char)c)
-			;
-		return ((char *)s);
+			return ((char *)s);
 		s++;
 	}
 	if ((unsigned char)c == '\0')
@@ -42,13 +53,17 @@ char	*ft_strdup(const char *s)
 	dup[i] = '\0';
 	return (dup);
 }
+
 char	*ft_strjoin(const char *s1, char const *s2)
 {
-	int i;
-	int j;
-	int len1;
-	int len2;
-	char *res;
+	int		i;
+	int		j;
+	int		len1;
+	int		len2;
+	char	*res;
+
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
 	res = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!s1 || !s2)
 		return (NULL);
@@ -64,30 +79,4 @@ char	*ft_strjoin(const char *s1, char const *s2)
 	}
 	res[i + j] = '\0';
 	return (res);
-}
-void	*ft_memmove(void *dest, const void *src, size_t n)
-{
-	unsigned char *d;
-	unsigned char *s;
-
-	d = (unsigned char *)dest;
-	s = (unsigned char *)src;
-	if (!dest || !src)
-		return (NULL);
-	if (dest > src)
-	{
-		while (n > 0)
-		{
-			n--;
-			d[n] = s[n];
-		}
-	}
-	else
-	{
-		while (n--)
-		{
-			*d++ = *s++;
-		}
-	}
-	return (dest);
 }
