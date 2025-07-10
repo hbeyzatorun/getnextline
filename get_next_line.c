@@ -1,7 +1,7 @@
 #include "get_next_line.h"
 #include <stdlib.h>
 
-static void newfree(char **ptr, char *newvalue)
+static void helper_free(char **ptr, char *newvalue)
 {
     free(*ptr);
     *ptr = newvalue;
@@ -27,11 +27,11 @@ static char *newline(char **save)
         while (++i < len)
             res[i] = (*save)[i];
         res[len] = '\0';
-        newfree(save, ft_strdup(newlines + 1));
+        helper_free(save, ft_strdup(newlines + 1));
         return (res);
     }
     res = ft_strdup(*save);
-    newfree(save, NULL);
+    helper_free(save, NULL);
     return (res);
 }
 
