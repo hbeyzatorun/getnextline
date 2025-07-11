@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -79,26 +79,26 @@ static char	*readline(int fd, char *curr)
 
 char	*get_next_line(int fd)
 {
-	static char	*save;
+	static char	*save[1024];
 	char		*temp;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (!save)
-		save = ft_strdup("");
-	if (!save)
+	if (!save[fd])
+		save[fd] = ft_strdup("");
+	if (!save[fd])
 		return (NULL);
-	while (!ft_strchr(save, '\n'))
+	while (!ft_strchr(save[fd], '\n'))
 	{
-		temp = readline(fd, save);
+		temp = readline(fd, save[fd]);
 		if (!temp)
 		{
-			helper_free(&save, NULL);
+			helper_free(&save[fd], NULL);
 			return (NULL);
 		}
-		if (temp == save)
+		if (temp == save[fd])
 			break;
-		save = temp;
+		save[fd] = temp;
 	}
-	return (newline (&save));
+	return (newline (&save[fd]));
 }
