@@ -6,7 +6,7 @@
 /*   By: htorun <htorun@student.42istanbul.com.tr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 23:00:26 by htorun            #+#    #+#             */
-/*   Updated: 2025/07/12 12:44:06 by htorun           ###   ########.fr       */
+/*   Updated: 2025/07/12 19:22:45 by htorun           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -86,17 +86,17 @@ char	*ft_strjoin(const char *s1, char const *s2)
 void	*ft_calloc(size_t nmemb, size_t size)
 {
 	void	*result;
-	size_t total_size;
-	size_t i;
+	size_t	total_size;
+	size_t	i;
 
 	total_size = nmemb * size;
 	result = malloc(total_size);
 	if (!result)
-		return(NULL);
+		return (NULL);
 	i = 0;
-	while(i < total_size)
+	while (i < total_size)
 	{
 		((unsigned char *)result)[i++] = 0;
 	}
-	return (result);	
+	return (result);
 }
