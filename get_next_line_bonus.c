@@ -6,11 +6,11 @@
 /*   By: htorun <htorun@student.42istanbul.com.tr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 22:44:32 by htorun            #+#    #+#             */
-/*   Updated: 2025/07/10 22:58:43 by htorun           ###   ########.tr       */
+/*   Updated: 2025/07/12 12:43:25 by htorun           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "get_next_line.h"
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -97,7 +97,7 @@ char	*get_next_line(int fd)
 			return (NULL);
 		}
 		if (temp == save[fd])
-			break;
+			break ;
 		save[fd] = temp;
 	}
 	return (newline (&save[fd]));

@@ -6,7 +6,7 @@
 /*   By: htorun <htorun@student.42istanbul.com.tr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 22:44:32 by htorun            #+#    #+#             */
-/*   Updated: 2025/07/10 22:58:43 by htorun           ###   ########.tr       */
+/*   Updated: 2025/07/12 12:43:25 by htorun           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ char	*get_next_line(int fd)
 			return (NULL);
 		}
 		if (temp == save)
-			break;
+			break ;
 		save = temp;
 	}
 	return (newline (&save));

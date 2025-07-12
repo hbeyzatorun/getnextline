@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: htorun <htorun@student.42istanbul.com.tr>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/07/10 23:00:26 by htorun            #+#    #+#             */
+/*   Updated: 2025/07/12 12:44:06 by htorun           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "get_next_line_bonus.h"
 
 size_t	ft_strlen(const char *s)
@@ -53,7 +64,7 @@ char	*ft_strjoin(const char *s1, char const *s2)
 
 	len1 = ft_strlen(s1);
 	len2 = ft_strlen(s2);
-	res = calloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1), sizeof(char));
+	res = calloc(sizeof(char) * (len1 + len2 + 1), sizeof(char));
 	if (!s1 || !s2)
 		return (NULL);
 	i = 0;
