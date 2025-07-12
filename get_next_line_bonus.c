@@ -37,7 +37,7 @@ static char	*newline(char **save)
 	if (newlines)
 	{
 		len = newlines - *save + 1;
-		res = calloc(len + 1, sizeof(char));
+		res = ft_calloc(len + 1, sizeof(char));
 		if (!res)
 			return (NULL);
 		i = -1;
@@ -58,7 +58,7 @@ static char	*readline(int fd, char *curr)
 	char	*new_str;
 	int		bytes_read;
 
-	buffer = calloc(BUFFER_SIZE + 1, sizeof(char));
+	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	if (!buffer)
 		return (NULL);
 	bytes_read = read(fd, buffer, BUFFER_SIZE);

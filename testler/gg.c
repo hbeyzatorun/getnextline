@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: htorun <htorun@student.42istanbul.com.tr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/10 22:44:32 by htorun            #+#    #+#             */
-/*   Updated: 2025/07/12 17:33:32 by htorun           ###   ########.fr       */
+/*   Created: 2025/07/12 12:37:07 by htorun            #+#    #+#             */
+/*   Updated: 2025/07/12 12:39:18 by htorun           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 #include <stdlib.h>
 #include <stdio.h>
 
 static void	helper_free(char **ptr, char *newvalue)
 {
-	if (*ptr)
+	if (*ptr || ptr)
 	{
 		free(*ptr);
 		*ptr = NULL;
@@ -32,17 +32,18 @@ static char	*newline(char **save)
 	int			len;
 
 	if (!*save || !**save)
-		return (helper_free(save, NULL), NULL);
+		return (NULL);
 	newlines = ft_strchr(*save, '\n');
 	if (newlines)
 	{
 		len = newlines - *save + 1;
-		res = ft_calloc(len + 1, sizeof(char));
+		res = calloc(len + 1, sizeof(char));
 		if (!res)
 			return (NULL);
 		i = -1;
 		while (++i < len)
 			res[i] = (*save)[i];
+		res[len] = '\0';
 		helper_free(save, ft_strdup(newlines + 1));
 		return (res);
 	}
@@ -57,20 +58,27 @@ static char	*readline(int fd, char *curr)
 	char	*new_str;
 	int		bytes_read;
 
-	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	buffer = calloc(BUFFER_SIZE + 1, sizeof(char));
 	if (!buffer)
+	{
+		free (curr);
 		return (NULL);
+	}
 	bytes_read = read(fd, buffer, BUFFER_SIZE);
 	if (bytes_read <= 0)
 	{
 		free(buffer);
-		return (curr);
+		free (curr);
+		return (NULL);
 	}
 	buffer[bytes_read] = '\0';
 	new_str = ft_strjoin(curr, buffer);
 	free (buffer);
 	if (!new_str)
+	{
+		free (curr);
 		return (NULL);
+	}
 	if (curr != NULL && curr != new_str)
 		free (curr);
 	return (new_str);
@@ -78,26 +86,23 @@ static char	*readline(int fd, char *curr)
 
 char	*get_next_line(int fd)
 {
-	static char	*save;
+	static char	*save[1024];
 	char		*temp;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (!save)
-		save = ft_strdup("");
-	if (!save)
+	if (!save[fd])
+		save[fd] = ft_strdup("");
+	if (!save[fd])
 		return (NULL);
-	while (!ft_strchr(save, '\n'))
+	while (!ft_strchr(save[fd], '\n'))
 	{
-		temp = readline(fd, save);
+		temp = readline(fd, save[fd]);
 		if (!temp)
-		{
-			helper_free(&save, NULL);
 			return (NULL);
-		}
-		if (temp == save)
+		if (temp == save[fd])
 			break ;
-		save = temp;
+		save[fd] = temp;
 	}
-	return (newline (&save));
+	return (newline (&save[fd]));
 }

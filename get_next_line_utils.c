@@ -82,3 +82,21 @@ char	*ft_strjoin(const char *s1, char const *s2)
 	res[i + j] = '\0';
 	return (res);
 }
+
+void	*ft_calloc(size_t nmemb, size_t size)
+{
+	void	*result;
+	size_t total_size;
+	size_t i;
+
+	total_size = nmemb * size;
+	result = malloc(total_size);
+	if (!result)
+		return(NULL);
+	i = 0;
+	while(i < total_size)
+	{
+		((unsigned char *)result)[i++] = 0;
+	}
+	return (result);	
+}
