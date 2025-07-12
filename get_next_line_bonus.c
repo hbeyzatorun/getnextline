@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: htorun <htorun@student.42istanbul.com.tr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 22:44:32 by htorun            #+#    #+#             */
-/*   Updated: 2025/07/12 12:43:25 by htorun           ###   ########.fr       */
+/*   Updated: 2025/07/12 17:43:07 by htorun           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,7 @@ static char	*newline(char **save)
 	int			len;
 
 	if (!*save || !**save)
-	{
-		helper_free(save,NULL);
-		return (NULL);
-	}
+		return (helper_free(save, NULL), NULL);
 	newlines = ft_strchr(*save, '\n');
 	if (newlines)
 	{
