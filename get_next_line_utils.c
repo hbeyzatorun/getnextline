@@ -62,11 +62,11 @@ char	*ft_strjoin(const char *s1, char const *s2)
 	int		len2;
 	char	*res;
 
+	if (!s1 || !s2)
+		return (NULL);
 	len1 = ft_strlen(s1);
 	len2 = ft_strlen(s2);
 	res = calloc(sizeof(char) * (len1 + len2 + 1), sizeof(char));
-	if (!s1 || !s2)
-		return (NULL);
 	i = 0;
 	while (i < len1)
 	{

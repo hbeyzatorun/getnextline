@@ -6,7 +6,7 @@
 /*   By: htorun <htorun@student.42istanbul.com.tr>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 22:44:32 by htorun            #+#    #+#             */
-/*   Updated: 2025/07/12 12:43:25 by htorun           ###   ########.fr       */
+/*   Updated: 2025/07/10 22:58:43 by htorun           ###   ########.tr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ static char	*newline(char **save)
 	int			len;
 
 	if (!*save || !**save)
+	{
+		helper_free(save, NULL);
 		return (NULL);
+	}
 	newlines = ft_strchr(*save, '\n');
 	if (newlines)
 	{
@@ -97,7 +100,7 @@ char	*get_next_line(int fd)
 			return (NULL);
 		}
 		if (temp == save)
-			break ;
+			break;
 		save = temp;
 	}
 	return (newline (&save));

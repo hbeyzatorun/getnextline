@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -32,7 +32,10 @@ static char	*newline(char **save)
 	int			len;
 
 	if (!*save || !**save)
+	{
+		helper_free(save,NULL);
 		return (NULL);
+	}
 	newlines = ft_strchr(*save, '\n');
 	if (newlines)
 	{
