@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
-#include <stdlib.h>
-#include <stdio.h>
 
 static void	helper_free(char **ptr, char *newvalue)
 {
